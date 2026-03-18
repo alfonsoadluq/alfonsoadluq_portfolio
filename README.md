@@ -1,4 +1,4 @@
 # alfonsoadluq_portfolio
-Hola, este es mi portfolio oficial, donde podrás conocer más sobre mí, mis proyectos y contactarme, visítalo cuando quieras.
+Bienvenido a mi portfolio oficial, donde podrás conocer más sobre mí y mis proyectos, además de poder contactarme, visítelo cuando quiera.
 
 Pulse aquí para visitar mi portfolio: **[alfonsoaldev](https://alfonsoaldev.app/)**
