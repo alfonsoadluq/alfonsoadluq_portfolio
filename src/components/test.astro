@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+---
+
+<Layout>
+  <!-- 1. EL AURA (Efecto de resplandor de fondo) -->
+  <div class="aura-cyan"></div>
+
+  <!-- NAVEGACIÓN -->
+  <nav class="fixed top-0 w-full flex justify-end p-6 z-50">
+    <ThemeToggle />
+  </nav>
+
+  <!-- SECCIÓN HERO -->
+  <main class="flex flex-col items-center justify-center min-h-screen text-center px-4">
+    
+    <!-- 2. EFECTO FLOATING (Aplicado al badge superior) -->
+    <div class="floating">
+        <span class="text-cian font-bold tracking-[0.4em] text-[10px] md:text-xs mb-4 uppercase border border-cian/20 bg-cian/5 px-4 py-2 rounded-full">
+            &lt; Fullstack Developer /&gt;
+        </span>
+    </div>
+    
+    <!-- TEXTO GRADIENTE ANIMADO -->
+    <h1 class="text-5xl md:text-8xl font-black animate-gradient-text tracking-tighter mt-8 pb-2">
+        Alfonso Adiego Luque
+    </h1>
+
+    <div class="w-24 h-1 bg-gradient-to-r from-cian to-purpura my-8 rounded-full"></div>
+
+    <p class="text-texto-muted font-medium tracking-[0.2em] text-sm md:text-base uppercase">
+        Optimización • Seguridad • Escalabilidad
+    </p>
+
+    <!-- 3. SECCIÓN DE EJEMPLOS DE EFECTOS -->
+    <section class="mt-24 w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+        
+        <!-- EJEMPLO: CARD BORDER GLOW -->
+        <div class="card-border-glow h-full">
+            <div class="card-content p-8">
+                <h3 class="text-cian font-bold text-xl mb-4">Efecto: Card Border Glow</h3>
+                <p class="text-texto-muted text-sm leading-relaxed">
+                    Este borde gira infinitamente usando un <code>conic-gradient</code>. Es ideal para destacar tus proyectos principales o servicios premium.
+                </p>
+                
+                <!-- 4. EJEMPLO: DIVIDER BEAM (Rayo de luz) -->
+                <div class="my-6">
+                    <p class="text-[10px] text-purpura uppercase tracking-widest mb-2">Separador Dinámico</p>
+                    <div class="divider-beam"></div>
+                </div>
+
+                <button class="text-xs font-bold text-white border border-white/10 bg-white/5 px-4 py-2 rounded-lg hover:border-cian/50 transition-colors">
+                    Saber más
+                </button>
+            </div>
+        </div>
+
+        <!-- OTRO EJEMPLO DE CARD (Para ver cómo conviven) -->
+        <div class="card-border-glow h-full">
+            <div class="card-content p-8">
+                <div class="flex justify-between items-start">
+                    <h3 class="text-white font-bold text-xl mb-4">Efecto: Floating UI</h3>
+                    <!-- Un pequeño círculo flotando -->
+                    <div class="w-3 h-3 bg-cian rounded-full floating shadow-[0_0_15px_rgba(0,193,253,0.5)]"></div>
+                </div>
+                <p class="text-texto-muted text-sm leading-relaxed mb-6">
+                    La animación <code>floating</code> da una sensación de ligereza. Úsala en iconos, logos o elementos decorativos para romper la rigidez de la web.
+                </p>
+                
+                <div class="flex gap-2">
+                    <span class="text-[10px] bg-purpura/20 text-purpura border border-purpura/30 px-2 py-1 rounded">CSS3</span>
+                    <span class="text-[10px] bg-cian/20 text-cian border border-cian/30 px-2 py-1 rounded">ASTRO</span>
+                    <span class="text-[10px] bg-azul/20 text-azul border border-azul/30 px-2 py-1 rounded">TAILWIND</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- FOOTER SIMPLE -->
+    <footer class="mt-32 pb-12 text-texto-muted text-xs tracking-widest">
+        &copy; 2024 ALFONSO ADIEGO — HECHO CON PASIÓN
+    </footer>
+
+  </main>
+</Layout>
+
+<style>
+    /* Ajuste local para que el h1 no sea tan gigante en móviles muy pequeños */
+    @media (max-width: 380px) {
+        h1 { font-size: 2.5rem; }
+    }
+</style>

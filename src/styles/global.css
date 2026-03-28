@@ -1,29 +1,50 @@
 @import "tailwindcss";
 
 @theme {
+    /* --- BREAKPOINTS --- */
     --breakpoint-xlm: 87.5rem;
     --breakpoint-3xl: 120rem;
     --breakpoint-4xl: 160rem;
 
+    /* --- PALETA DE COLORES (EXTRAÍDA DE TU BANNER) --- */
     --cian: #00C1FD;
     --azul: #2563EB;
     --purpura: #8B5CF6;
-    --fondo: #030712;
+    --fondo-top: #050b18;    /* Azul marino abisal */
+    --fondo-bottom: #020617; /* Negro azulado profundo */
     --texto-muted: #94A3B8;
 
     --color-site-bg: light-dark(#ffffff, #030712);
-    --color-site-text: light-dark(#1e293b, #f1f5f9);
-    --color-dot: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.08));
+    --color-dot: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.15));
 
-    --degradado-nombre: linear-gradient(to right, var(--cian), var(--azul), var(--purpura));
+    --degradado-nombre: linear-gradient(
+        to right, 
+        var(--cian), 
+        var(--azul), 
+        var(--purpura), 
+        var(--azul), 
+        var(--cian)
+    );
 }
 
 @layer base {
-    :root { color-scheme: light dark; }
+    :root { 
+        color-scheme: light dark; 
+    }
+
     [data-theme="light"] { color-scheme: light; }
     [data-theme="dark"] { color-scheme: dark; }
 
-    html, body {
+    html {
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+    }
+
+    html::-webkit-scrollbar {
+        display: none;
+    }
+
+    body {
         @apply transition-colors duration-500;
         background-color: var(--color-site-bg);
         color: var(--color-site-text);
@@ -32,19 +53,100 @@
 }
 
 @layer utilities {
-    .dots-bg {
-        background-image: radial-gradient(var(--color-dot) 1.5px, transparent 0);
-        background-size: 30px 30px;
-    }
-    .aura-cyan {
-        position: fixed; top: -10%; left: -10%; width: 50%; height: 50%;
-        background: var(--cian); filter: blur(140px); opacity: 0.12;
-        z-index: -1; pointer-events: none;
-    }
-    .text-gradient-name {
-        background: var(--degradado-nombre);
+    .animate-gradient-text {
+        display: inline-block;
+        padding-bottom: 0.15em;
+        padding-right: 0.05em;
+        line-height: 1.1;
+        background-image: var(--degradado-nombre);
+        background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        animation: shine 6s linear infinite;
+    }
+
+    .card-border-glow {
+        position: relative;
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 1px;
+        overflow: hidden;
+    }
+
+    .card-border-glow::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(
+            transparent, 
+            var(--cian), 
+            var(--purpura), 
+            transparent 30%
+        );
+        animation: rotate 4s linear infinite;
+    }
+
+    .card-content {
+        position: relative;
+        background: var(--fondo-bottom);
+        border-radius: 1rem;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .aura-cyan {
+        position: fixed; 
+        top: -5%; 
+        left: -5%; 
+        width: 60%; 
+        height: 60%;
+        background: radial-gradient(circle, rgba(0, 193, 253, 0.12) 0%, transparent 70%);
+        filter: blur(100px); 
+        z-index: -1; 
+        pointer-events: none;
+    }
+
+    .divider-beam {
+        height: 1px;
+        width: 100%;
+        background: linear-gradient(
+            to right,
+            transparent,
+            rgba(0, 193, 253, 0.1),
+            var(--cian),
+            rgba(139, 92, 246, 0.1),
+            transparent
+        );
+        background-size: 200% 100%;
+        animation: beam 4s infinite linear;
+    }
+
+    .floating {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes shine {
+        from { background-position: 0% center; }
+        to { background-position: -200% center; }
+    }
+
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    @keyframes beam {
+        from { background-position: 200% 0; }
+        to { background-position: -200% 0; }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
     }
 }
