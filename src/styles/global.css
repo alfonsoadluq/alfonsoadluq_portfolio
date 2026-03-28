@@ -1,1 +1,50 @@
 @import "tailwindcss";
+
+@theme {
+    --breakpoint-xlm: 87.5rem;
+    --breakpoint-3xl: 120rem;
+    --breakpoint-4xl: 160rem;
+
+    --cian: #00C1FD;
+    --azul: #2563EB;
+    --purpura: #8B5CF6;
+    --fondo: #030712;
+    --texto-muted: #94A3B8;
+
+    --color-site-bg: light-dark(#ffffff, #030712);
+    --color-site-text: light-dark(#1e293b, #f1f5f9);
+    --color-dot: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.08));
+
+    --degradado-nombre: linear-gradient(to right, var(--cian), var(--azul), var(--purpura));
+}
+
+@layer base {
+    :root { color-scheme: light dark; }
+    [data-theme="light"] { color-scheme: light; }
+    [data-theme="dark"] { color-scheme: dark; }
+
+    html, body {
+        @apply transition-colors duration-500;
+        background-color: var(--color-site-bg);
+        color: var(--color-site-text);
+        min-height: 100vh;
+    }
+}
+
+@layer utilities {
+    .dots-bg {
+        background-image: radial-gradient(var(--color-dot) 1.5px, transparent 0);
+        background-size: 30px 30px;
+    }
+    .aura-cyan {
+        position: fixed; top: -10%; left: -10%; width: 50%; height: 50%;
+        background: var(--cian); filter: blur(140px); opacity: 0.12;
+        z-index: -1; pointer-events: none;
+    }
+    .text-gradient-name {
+        background: var(--degradado-nombre);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+}

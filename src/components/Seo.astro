@@ -1,0 +1,24 @@
+---
+import { Images } from "@assets/images";
+
+const currentUrl = Astro.url.origin + Astro.url.pathname;
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+---
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="canonical" href={currentUrl} /> 
+<link rel="alternate" href={currentUrl} hreflang="es" />
+<meta name="description" content={Astro.props.description} />
+<meta property="og:title" content={Astro.props.title} />
+<meta property="og:description" content={Astro.props.description} />
+<meta property="og:url" content={currentUrl} />
+<meta property="og:image" content={new URL(Images.logos.logoAlfonso.src, Astro.site)} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={Astro.props.title} />
+<meta name="twitter:description" content={Astro.props.description} />
+<meta name="twitter:image" content={new URL(Images.logos.logoAlfonso.src, Astro.site)} />
+<meta name="robots" content="index, follow" />
+<title>{Astro.props.title}</title>
