@@ -10,20 +10,78 @@ const imageData = {
 
 const navData =[
     { name: "Inicio", href: "/#" },
-    { name: "Experiencia", href: "/#projects" },
-    { name: "Proyectos", href: "/#about" },
-    { name: "Sobre mí", href: "/#contact" },
+    { name: "Experiencia", href: "/#experience" },
+    { name: "Proyectos", href: "/#projects" },
+    { name: "Sobre mí", href: "/#about" },
     { name: "Contacto", href: "/#contact" },
 ]
 ---
 
-<!-- HEADER CONTAINER (pointer-events-none evita que bloquee clics en los laterales) -->
-<header class="fixed top-0 left-0 w-full flex justify-center items-start z-[100] pt-2 pointer-events-none">
-    <nav id="main-nav" class="pointer-events-auto flex justify-between items-center w-full transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] border rounded-full will-change-[max-width,padding,background-color,border-color] origin-center max-w-[1440px] px-6 md:px-[150px] py-4 bg-transparent border-transparent">
-        <div class="flex items-center justify-center">
-            <button id="easterEggButton" class="relative opacity-0 cursor-pointer transition-transform active:scale-95 select-none">
+<header class="fixed top-0 left-0 w-full flex justify-center items-start z-[100] pt-6 pointer-events-none">
+    
+    <nav 
+        id="main-nav" 
+        class="relative pointer-events-auto flex items-center justify-between w-full transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] border rounded-full will-change-[max-width,padding,background-color] origin-center
+        max-w-[960px] px-7 md:px-[60px] py-4 bg-transparent border-transparent overflow-hidden">
+        <div id="secret-trigger" class="absolute left-0 top-0 w-12 md:w-16 h-full cursor-pointer z-50 rounded-l-full hidden md:block"></div>
+
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="flex-1 flex justify-start items-center">
+            <div id="logo-box" class="flex items-center justify-start transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] overflow-hidden w-[60px] md:w-[70px] opacity-0">
+                <button id="easterEggButton" class="relative cursor-pointer transition-transform active:scale-95 select-none outline-none pr-4">
+                    <Picture
+                        id="logo-image"
+                        {...imageData}
+                        width={100}
+                        height={80}
+                        widths={[100, 120, 160, 200]}
+                        sizes="(max-width: 768px) 105px, 100px"
+                        formats={["avif", "webp"]}
+                        loading="eager"
+                        fetchpriority="high"
+                        decoding="async"
+                        class="w-[60px] md:w-[50px] h-auto object-contain will-change-[transform,filter]"
+                    />
+                </button>
+            </div>
+        </div>
+
+        <!-- COLUMNA CENTRAL (Reducido el gap de 8 a 6 para que estén más juntos) -->
+        <ul class="hidden md:flex items-center justify-center gap-4 md:gap-6 flex-shrink-0">
+            {navData.map((item) => (
+                <li class="text-sm font-medium text-text-muted transition-colors duration-300">
+                    <a href={item.href} class="hover:text-cyan whitespace-nowrap">{item.name}</a>
+                </li>
+            ))}
+        </ul>
+
+        <!-- COLUMNA DERECHA -->
+        <div class="flex-1 flex justify-end items-center gap-4">
+            <div class="hidden md:block">
+                <ThemeButton />
+            </div>
+            
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-text-muted hover:text-cyan transition-colors" aria-label="Abrir menú">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M4 6l16 0" />
+                    <path d="M4 12l16 0" />
+                    <path d="M4 18l16 0" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- BACKDROP MÓVIL -->
+    <div id="mobile-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+    <!-- PANEL LATERAL MÓVIL -->
+    <aside id="mobile-sidebar" class="fixed top-0 right-0 h-screen w-[280px] bg-white dark:bg-[#050b18] border-l border-gray-200 dark:border-white/10 z-[200] transform translate-x-full transition-[transform,background-color] duration-[500ms] ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col px-8 py-8 shadow-2xl pointer-events-auto">
+        
+        <div class="flex justify-between items-center mb-12 min-h-[40px]">
+            <button id="mobile-easterEggButton" class="relative opacity-0 cursor-pointer transition-transform active:scale-95 select-none outline-none">
                 <Picture
-                    id="logo-image"
+                    id="mobile-logo-image"
                     {...imageData}
                     width={100}
                     height={80}
@@ -33,103 +91,169 @@ const navData =[
                     loading="eager"
                     fetchpriority="high"
                     decoding="async"
-                    class="w-[80px] md:w-[60px] h-auto object-contain transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+                    class="w-[45px] h-auto object-contain will-change-[transform,filter]"
                 />
+            </button>
+
+            <button id="close-menu-btn" class="p-2 text-slate-500 dark:text-text-muted hover:text-cyan transition-transform active:scale-90" aria-label="Cerrar menú">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M18 6l-12 12" />
+                    <path d="M6 6l12 12" />
+                </svg>
             </button>
         </div>
 
-        <!-- ENLACES -->
-        <ul class="hidden md:flex items-center gap-8">
-            {navData.map((item) => (
-                <li class="text-sm font-medium text-text-muted transition-colors duration-300">
-                    <a href={item.href} class="hover:text-cyan whitespace-nowrap">{item.name}</a>
+        <ul class="flex flex-col gap-6 w-full">
+            {navData.map((item, index) => (
+                <li class="flex items-center justify-between w-full min-h-[48px]">
+                    <a href={item.href} class="mobile-link text-2xl font-bold text-slate-800 dark:text-white/90 hover:text-cyan transition-colors leading-none block">
+                        {item.name}
+                    </a>
+                    {index === 0 && (
+                        <div class="flex items-center justify-center translate-y-[2px] pr-1">
+                            <ThemeButton />
+                        </div>
+                    )}
                 </li>
             ))}
         </ul>
-
-        <!-- BOTÓN DE TEMA -->
-        <div class="flex items-center">
-            <ThemeButton />
-        </div>
-    </nav>
+    </aside>
 </header>
 
 <script>
-    // 1. LÓGICA DEL MENÚ FLOTANTE (PILL EFFECT 120FPS)
-    const initScroll = () => {
+    const initHeader = () => {
         const nav = document.getElementById('main-nav');
+        const logoBox = document.getElementById('logo-box');
         const logoImage = document.getElementById('logo-image');
+        const easterEggButton = document.getElementById('easterEggButton');
+        const secretTrigger = document.getElementById('secret-trigger');
 
-        const topClasses =['max-w-[1440px]', 'md:px-[150px]', 'py-4', 'bg-transparent', 'border-transparent'];
-        const pillClasses = ['max-w-[750px]', 'md:px-8', 'px-6', 'py-2', 'bg-white/10', 'dark:bg-[#030712]/60', 'backdrop-blur-xl', 'border-gray-200/20', 'dark:border-white/10', 'shadow-2xl'];
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        const mobileBackdrop = document.getElementById('mobile-backdrop');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const mobileEasterEggButton = document.getElementById('mobile-easterEggButton');
+        const mobileLogoImage = document.getElementById('mobile-logo-image');
 
-        let isScrolled = false;
+        if (!nav || !logoBox) return;
+
+        // --- 1. LÓGICA SCROLL (ANCHOS MÁS COMPACTOS) ---
+        // Reducido de 1440 a 960 para que arriba no estén tan separados
+        const topClasses =['max-w-[960px]', 'md:px-[60px]', 'py-4', 'bg-transparent', 'border-transparent'];
+        const pillClasses =['md:px-8', 'px-6', 'py-2', 'bg-white/10', 'dark:bg-[#030712]/60', 'backdrop-blur-xl', 'border-gray-200/20', 'dark:border-white/10', 'shadow-2xl'];
+
+        let isScrolled = window.scrollY > 20;
+
+        const updateUI = () => {
+            requestAnimationFrame(() => {
+                if (!isScrolled) {
+                    // MODO ARRIBA
+                    nav.classList.remove(...pillClasses, 'max-w-[520px]', 'max-w-[620px]');
+                    nav.classList.add(...topClasses);
+                    
+                    logoBox.className = `flex items-center justify-start transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] overflow-hidden w-[60px] md:w-[70px] ${isActive ? 'opacity-100' : 'opacity-0'}`;
+                } else {
+                    // MODO PASTILLA
+                    nav.classList.remove(...topClasses);
+                    nav.classList.add(...pillClasses);
+
+                    if (isActive) {
+                        // Pastilla abierta (Ancho máximo súper compacto de 620px en vez de 780px)
+                        nav.classList.remove('max-w-[520px]');
+                        nav.classList.add('max-w-[620px]'); 
+                        logoBox.className = "flex items-center justify-start transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] overflow-visible w-[50px] md:w-[60px] opacity-100 mr-2";
+                    } else {
+                        // Pastilla cerrada (Ancho miniatura de 520px)
+                        nav.classList.remove('max-w-[620px]');
+                        nav.classList.add('max-w-[620px]'); 
+                        logoBox.className = "flex items-center justify-start transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] overflow-hidden w-0 opacity-0 mr-0";
+                    }
+                }
+            });
+        };
 
         window.addEventListener('scroll', () => {
-            // Usamos una variable de estado para no forzar al navegador a repintar si ya está en el estado correcto
-            if (window.scrollY > 20 && !isScrolled) {
-                isScrolled = true;
-                
-                // Usamos requestAnimationFrame para sincronizar la animación con el monitor (120hz)
-                requestAnimationFrame(() => {
-                    nav?.classList.remove(...topClasses);
-                    nav?.classList.add(...pillClasses);
-                    logoImage?.classList.add('scale-[0.85]'); // Encogemos el logo un poquito
-                });
-
-            } else if (window.scrollY <= 20 && isScrolled) {
-                isScrolled = false;
-                
-                requestAnimationFrame(() => {
-                    nav?.classList.remove(...pillClasses);
-                    nav?.classList.add(...topClasses);
-                    logoImage?.classList.remove('scale-[0.85]');
-                });
+            const shouldBeScrolled = window.scrollY > 20;
+            if (shouldBeScrolled !== isScrolled) {
+                isScrolled = shouldBeScrolled;
+                updateUI();
             }
         });
-    }
+        updateUI(); // Disparo inicial
 
-    // 2. LÓGICA DEL EASTER EGG (Se mantiene intacta)
-    const setupEasterEgg = () => {
-        const easterEggButton = document.getElementById('easterEggButton');
-        if (!easterEggButton || easterEggButton.hasAttribute('data-init')) return;
-        easterEggButton.setAttribute('data-init', 'true');
+        // --- 2. LÓGICA MENÚ MÓVIL ---
+        const openMenu = () => {
+            mobileSidebar?.classList.remove('translate-x-full');
+            mobileBackdrop?.classList.remove('opacity-0', 'pointer-events-none');
+            mobileBackdrop?.classList.add('opacity-100', 'pointer-events-auto');
+        };
+
+        const closeMenu = () => {
+            mobileSidebar?.classList.add('translate-x-full');
+            mobileBackdrop?.classList.remove('opacity-100', 'pointer-events-auto');
+            mobileBackdrop?.classList.add('opacity-0', 'pointer-events-none');
+        };
+
+        mobileMenuBtn?.addEventListener('click', openMenu);
+        closeMenuBtn?.addEventListener('click', closeMenu);
+        mobileBackdrop?.addEventListener('click', closeMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+
+        // --- 3. LÓGICA EASTER EGG ---
+        if (easterEggButton?.hasAttribute('data-init')) return;
+        easterEggButton?.setAttribute('data-init', 'true');
 
         let clickCount = 5;
-        let isIgniting = false;
         let isActive = false;
+        let canRedirect = false;
 
-        easterEggButton.addEventListener('click', () => {
-            if (isIgniting) return;
+        const handleSecretClick = (e) => {
+            e.preventDefault();
             
-            if (isActive) {
-                easterEggButton.classList.add('scale-110', 'opacity-0');
-                setTimeout(() => { window.location.href = "https://www.google.com/"; }, 300);
+            if (isActive && !canRedirect) return; 
+
+            if (isActive && canRedirect) {
+                logoImage?.classList.add('scale-90', 'opacity-0');
+                mobileLogoImage?.classList.add('scale-90', 'opacity-0');
+                setTimeout(() => { window.location.href = "https://www.google.com/"; }, 100); 
                 return;
             }
-            
-            clickCount--;
-            
-            if (clickCount === 0) {
-                isIgniting = true;
-                easterEggButton.classList.remove('opacity-0');
-                easterEggButton.classList.add('opacity-100', 'neon-ignite');
-                easterEggButton.classList.add('slide-in-blurred-top');
 
-                setTimeout(() => {
-                    isIgniting = false;
-                    isActive = true;
-                }, 1500);
+            if (!isActive) clickCount--;
+
+            if (clickCount === 0 && !isActive) {
+                isActive = true;
+                canRedirect = false; 
+                if(secretTrigger) secretTrigger.style.display = 'none';
+
+                requestAnimationFrame(() => {
+                    updateUI(); 
+                    
+                    easterEggButton?.classList.remove('opacity-0');
+                    easterEggButton?.classList.add('opacity-100');
+                    logoImage?.classList.add('slide-in-blurred-top'); 
+
+                    if (mobileEasterEggButton && mobileLogoImage) {
+                        mobileEasterEggButton.classList.remove('opacity-0');
+                        mobileEasterEggButton.classList.add('opacity-100');
+                    }
+                    
+                    setTimeout(() => {
+                        logoImage?.classList.add('slide-in-blurred-top'); 
+                        canRedirect = true; 
+                    }, 1000);
+                });
             }
-        });
+        };
+
+        secretTrigger?.addEventListener('click', handleSecretClick);
+        easterEggButton?.addEventListener('click', handleSecretClick);
+        mobileEasterEggButton?.addEventListener('click', handleSecretClick);
     }
 
-    // Inicializar todo de forma segura
-    initScroll();
-    setupEasterEgg();
-    
-    document.addEventListener('astro:page-load', () => {
-        initScroll();
-        setupEasterEgg();
-    });
+    initHeader();
+    document.addEventListener('astro:page-load', initHeader);
 </script>
