@@ -2,277 +2,156 @@
 import { Picture } from "astro:assets";
 import { Images } from "@assets/images";
 
-const TABS =[
-  { 
-    id: "stack", 
-    label: "Stack Tecnológico", 
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>` 
-  },
-  { 
-    id: "tools", 
-    label: "Herramientas", 
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>` 
-  }
-];
-
-// Nota: whiteLogo solamente es para aquellos iconos que se ven mal con el filtro de inversión en modo oscuro.
-const SKILLS = {
-  stack: {
-    lenguajes:[
+const STACK_CATEGORIES = [
+  {
+    id: "lenguajes",
+    label: "Lenguajes",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>`,
+    skills: [
         { name: "JavaScript", icon: Images.icons.JsIcon }, 
         { name: "TypeScript", icon: Images.icons.TypescriptIcon },
         { name: "PHP", icon: Images.icons.PhpIcon },
         { name: "Python", icon: Images.icons.PythonIcon },
         { name: "C++", icon: Images.icons.CppIcon },
         { name: "C", icon: Images.icons.cIcon },
-    ],
-    frameworks:[
+    ]
+  },
+  {
+    id: "frameworks",
+    label: "Frameworks & Librerías",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-terminal"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 7l5 5l-5 5" /><path d="M12 19l7 0" /></svg>`,
+    skills: [
         { name: "React", icon: Images.icons.ReactIcon, whiteLogo: true },
         { name: "Astro", icon: Images.icons.AstroIcon, whiteLogo: true },
         { name: "Tailwind CSS", icon: Images.icons.TailWindIcon },
         { name: "Laravel", icon: Images.icons.LaravelIcon },
         { name: "Livewire", icon: Images.icons.LivewireIcon },
-    ],
-    basesDeDatos:[
+    ]
+  },
+  {
+    id: "db",
+    label: "Bases de Datos",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-database"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 15.731c1.968 1.507 5.234 2.269 9 2.269c3.76 0 7.025 -.76 9 -2.252v2.252c0 2.425 -3.895 3.936 -8.693 3.998l-.307 .002c-4.938 0 -9 -1.523 -9 -4z" /><path d="M3 9.731c1.968 1.507 5.234 2.269 9 2.269c3.76 0 7.025 -.76 9 -2.252v2.252c0 2.477 -4.062 4 -9 4c-4.798 0 -8.77 -1.438 -8.979 -3.795l-.016 -.101l-.005 -.104z" /><path d="M12 2c1.041 0 2.044 .068 2.977 .198l.469 .071q .84 .14 1.586 .348l.44 .131l.075 .024a11 11 0 0 1 .805 .3l.199 .086q .535 .242 .967 .53q .165 .11 .313 .225a3.8 3.8 0 0 1 .669 .668l.091 .128q .07 .105 .129 .211l.07 .139q .163 .35 .2 .73l.01 .211c0 2.477 -4.062 4 -9 4c-4.798 0 -8.77 -1.438 -8.979 -3.795a1 1 0 0 1 -.021 -.205l.005 -.104l.016 -.1c.205 -2.306 4.01 -3.733 8.667 -3.794z" /></svg>`,
+    
+    skills: [
         { name: "MySQL", icon: Images.icons.MySQLIcon, whiteLogo: true },
         { name: "PostgreSQL", icon: Images.icons.PostgreSQLIcon },
         { name: "MariaDB", icon: Images.icons.MariaDBIcon },
         { name: "MongoDB", icon: Images.icons.MongoDBIcon },
     ]
   },
-  tools: {
-    entorno:[
+  {
+    id: "tools",
+    label: "Herramientas & Cloud",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-cloud"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10.04 4.305c2.195 -.667 4.615 -.224 6.36 1.176c1.386 1.108 2.188 2.686 2.252 4.34l.003 .212l.091 .003c2.3 .107 4.143 1.961 4.25 4.27l.004 .211c0 2.407 -1.885 4.372 -4.255 4.482l-.21 .005h-11.878l-.222 -.008c-2.94 -.11 -5.317 -2.399 -5.43 -5.263l-.005 -.216c0 -2.747 2.08 -5.01 4.784 -5.417l.114 -.016l.07 -.181c.663 -1.62 2.056 -2.906 3.829 -3.518l.244 -.08z" /></svg>`,
+    skills: [
         { name: "VS Code", icon: Images.icons.VSCodeIcon },
         { name: "Git", icon: Images.icons.GitIcon },
         { name: "GitHub", icon: Images.icons.GitHubIcon, whiteLogo: true },
-    ],
-    cloud:[
         { name: "Vercel", icon: Images.icons.VercelIcon, whiteLogo: true },
         { name: "AWS", icon: Images.icons.AwsIcon, whiteLogo: true },
         { name: "Supabase", icon: Images.icons.SupabaseIcon },
-        { name: "WordPress", icon: Images.icons.WordpressIcon },
     ]
   }
-};
+];
 ---
 
-<section id="about" class="py-24 max-w-6xl mx-auto px-6 overflow-hidden">
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+<section id="about" class="py-24 max-w-6xl mx-auto px-6 overflow-hidden lg:scroll-mt-18">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center justify-center mb-24">
         
-        <!-- Columna de la izquierda -->
-        <div class="w-full">
-            <h2 class="text-4xl font-black mb-8 flex items-center gap-4 text-slate-900 dark:text-white tracking-tighter transition-colors duration-500">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-cyan icon icon-tabler icons-tabler-filled icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" /><path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" /></svg> Sobre mí
+        <!-- Columna izquierda de información -->
+        <div class="w-full md:sticky md:top-32">
+            <h2 class="text-4xl font-black mb-8 flex items-center gap-4 text-slate-900 dark:text-white tracking-tighter transition-colors duration-500 uppercase">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-cyan icon icon-tabler icons-tabler-filled icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" /><path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" /></svg>
+                Sobre mí
             </h2>
-
-            <div class="text-muted dark:text-text-muted leading-relaxed space-y-6 text-sm md:text-base transition-colors duration-500">
+            <div class="text-text-muted leading-relaxed space-y-6 text-sm md:text-base transition-colors duration-500">
                 <p>
-                    Soy un desarrollador apasionado por crear interfaces que no solo funcionen bien, sino que ofrezcan una <strong class="text-cyan font-bold">experiencia de usuario excepcional</strong>. 
+                    Soy un desarrollador junior en constante formación, con mentalidad de Ingeniero de Software y con el objetivo claro de consolidarme en el sector a través del estudio de la arquitectura de software, la calidad de código y la experiencia técnica.
                 </p>
                 <p>
-                    Mi enfoque se centra en el rendimiento, la escalabilidad y el diseño estructurado. Siempre busco aprender nuevas tecnologías y enfrentar retos complejos con soluciones eficientes.
+                    apasionado en la creación de proyectos creativos e innovadores, y me esfuerzo por aplicar todos mis conocimientos en su creación, además de siempre estar dispuesto a colaborar con otros para aprender y crecer juntos.
                 </p>
             </div>
         </div>
 
-        <!-- Columna de la derecha -->
-        <div class="w-full bg-slate-50/50 dark:bg-[#050b18]/40 border border-slate-200 dark:border-white/5 p-6 md:p-8 rounded-[2.5rem] backdrop-blur-md shadow-2xl transition-colors duration-500">
-            
-            <!-- Cabecera de Tabs -->
-            <div class="flex flex-wrap gap-2 md:gap-4 border-b border-slate-200 dark:border-white/10 pb-4 mb-6 transition-colors duration-500">
-                {TABS.map((tab, index) => (
-                    <button 
-                        data-target={tab.id}
-                        class={`tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 outline-none cursor-pointer
-                        ${index === 0 ? 'bg-cyan/10 dark:bg-white/10 text-cyan shadow-[0_0_15px_rgba(0,193,253,0.15)]' : 'text-slate-500 dark:text-text-muted hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-white/5'}`}
-                    >
-                        <Fragment set:html={tab.icon} />
-                        {tab.label}
+        <!-- Columna derecha de stack tecnológico -->
+        <div class="flex flex-col gap-4">
+            {STACK_CATEGORIES.map((cat) => (
+                <div class="stack-accordion-item group/item bg-slate-50/50 dark:bg-[#050b18]/40 border border-slate-200 dark:border-white/5 rounded-[0.8rem] overflow-hidden transition-all duration-500 hover:border-cyan/30 shadow-sm dark:shadow-2xl">
+                    
+                    <button class="accordion-trigger w-full flex items-center justify-between p-6 cursor-pointer outline-none">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-cyan/10 flex items-center justify-center text-cyan group-hover/item:scale-110 transition-transform duration-500">
+                                <Fragment set:html={cat.icon} />
+                            </div>
+                            <span class="text-lg font-black text-slate-800 dark:text-white tracking-tight uppercase">{cat.label}</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="chevron transition-transform duration-500 text-slate-400 dark:text-white/20" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
-                ))}
-            </div>
 
-            <div class="relative min-h-112.5">
-                
-                <!-- Pestaña Stack -->
-                <div id="stack" class="tab-content w-full transition-all duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] origin-top opacity-100 scale-100 relative z-10">
-                    
-                    <!-- Sección de Lenguajes -->
-                    <div class="mb-8">
-                        <h3 class="text-[10px] font-black text-slate-400 dark:text-white/30 mb-4 uppercase tracking-[0.2em]">Lenguajes</h3>
-                        <div class="flex flex-wrap gap-3">
-                            {SKILLS.stack.lenguajes.map((skill) => (
-                                <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-cyan/5 dark:hover:bg-cyan/10 hover:border-cyan/30 hover:shadow-[0_0_15px_rgba(0,193,253,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-default group shadow-sm dark:shadow-none whitespace-nowrap">
-
-                                    <div class="w-8 h-8 shrink-0 flex items-center justify-center bg-slate-50 dark:bg-black/20 rounded-full shadow-inner border border-slate-100 dark:border-transparent">
-                                        <Picture
-                                        src={skill.icon}
-                                        alt={skill.name}
-                                        width={64}
-                                        height={64}
-                                        widths={[64, 96, 128]}
-                                        sizes="(max-width: 768px) 24px, (max-width: 1024px) 28px, 32px"
-                                        loading="lazy"
-                                        fetchpriority="low"
-                                        decoding="async"
-                                        class={`max-w-5 md:max-w-6 lg:max-w-7 max-h-5 md:max-h-6 lg:max-h-7 w-auto h-auto object-contain transition-all 'invert dark:invert-0' : 'group-hover:drop-shadow-[0_0_5px_rgba(0,193,253,0.5)]'`}
-                                        />
+                    <!-- Badges con habilidades -->
+                    <div class="accordion-content">
+                        <div class="overflow-hidden">
+                            <div class="px-6 pb-8 flex flex-wrap gap-3">
+                                {cat.skills.map((skill) => (
+                                    <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-cyan/5 dark:hover:bg-cyan/10 hover:border-cyan/30 hover:shadow-[0_0_15px_rgba(0,193,253,0.15)] hover:-translate-y-0.5 transition-all duration-300 cursor-default group shadow-sm dark:shadow-none whitespace-nowrap">
+                                        
+                                        <div class="w-8 h-8 shrink-0 flex items-center justify-center bg-slate-50 dark:bg-black/20 rounded-full shadow-inner border border-slate-100 dark:border-transparent overflow-hidden">
+                                            <Picture
+                                            src={skill.icon}
+                                            alt={skill.name}
+                                            formats={['avif', 'webp']}
+                                            width={64}
+                                            height={64}
+                                            widths={[32, 48, 64, 80]}
+                                            sizes="(max-width: 768px) 20px, (max-width: 1024px) 32px, 64px"
+                                            loading="lazy"
+                                            fetchpriority="low"
+                                            decoding="async"
+                                            class={`max-w-5 max-h-auto object-contain transition-all ${skill.whiteLogo ? 'invert dark:invert-0' : 'group-hover:drop-shadow-[0_0_5px_rgba(0,193,253,0.5)]'}`}
+                                            />
+                                        </div>
+                                        <span class="text-sm font-semibold text-slate-700 dark:text-slate-200 group-hover:text-cyan dark:group-hover:text-white transition-colors">{skill.name}</span>
                                     </div>
-
-                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200 group-hover:text-cyan dark:group-hover:text-white transition-colors">{skill.name}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <!-- Subsección de Frameworks -->
-                    <div class="mb-8">
-                        <h3 class="text-[10px] font-black text-slate-400 dark:text-white/30 mb-4 uppercase tracking-[0.2em]">Frameworks & Librerías</h3>
-                        <div class="flex flex-wrap gap-3">
-                            {SKILLS.stack.frameworks.map((skill) => (
-                                <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-cyan/5 dark:hover:bg-cyan/10 hover:border-cyan/30 hover:shadow-[0_0_15px_rgba(0,193,253,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-default group shadow-sm dark:shadow-none">
-                                    <div class="w-7 h-7 flex items-center justify-center bg-slate-50 dark:bg-black/20 rounded-full p-1.5 shadow-inner border border-slate-100 dark:border-transparent">
-                                        <Picture
-                                        src={skill.icon}
-                                        alt={skill.name}
-                                        width={72}
-                                        height={72}
-                                        widths={[72, 96, 128]}
-                                        sizes="(max-width: 768px) 36px, (max-width: 1024px) 48px, 72px"
-                                        loading="lazy"
-                                        fetchpriority="low"
-                                        decoding="async"
-                                        class={`w-full h-full object-contain transition-all ${skill.whiteLogo ? 'invert dark:invert-0' : 'group-hover:drop-shadow-[0_0_5px_rgba(0,193,253,0.5)]'}`}
-                                        />
-                                    </div>
-                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200 group-hover:text-cyan dark:group-hover:text-white transition-colors">{skill.name}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <!-- Subsección de Bases de Datos -->
-                    <div>
-                        <h3 class="text-[10px] font-black text-slate-400 dark:text-white/30 mb-4 uppercase tracking-[0.2em]">Bases de Datos</h3>
-                        <div class="flex flex-wrap gap-3">
-                            {SKILLS.stack.basesDeDatos.map((skill) => (
-                                <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-cyan/5 dark:hover:bg-cyan/10 hover:border-cyan/30 hover:shadow-[0_0_15px_rgba(0,193,253,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-default group shadow-sm dark:shadow-none">
-                                    <div class="w-7 h-7 flex items-center justify-center bg-slate-50 dark:bg-black/20 rounded-full p-1.5 shadow-inner border border-slate-100 dark:border-transparent">
-                                        <Picture
-                                        src={skill.icon}
-                                        alt={skill.name}
-                                        width={72}
-                                        height={72}
-                                        widths={[72, 96, 128]}
-                                        sizes="(max-width: 768px) 36px, (max-width: 1024px) 48px, 72px"
-                                        loading="lazy"
-                                        fetchpriority="low"
-                                        decoding="async"
-                                        class={`w-full h-full object-contain transition-all ${skill.whiteLogo ? 'invert dark:invert-0' : 'group-hover:drop-shadow-[0_0_5px_rgba(0,193,253,0.5)]'}`}
-                                        />
-                                    </div>
-                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200 group-hover:text-cyan dark:group-hover:text-white transition-colors">{skill.name}</span>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Pestaña de Herramientas -->
-                <div id="tools" class="tab-content w-full transition-all duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] origin-top opacity-0 scale-95 absolute top-0 left-0 pointer-events-none">
-                    
-                    <!-- Sección de Entorno y Control de Versiones -->
-                    <div class="mb-8">
-                        <h3 class="text-[10px] font-black text-slate-400 dark:text-white/30 mb-4 uppercase tracking-[0.2em]">Entorno & Control de Versiones</h3>
-                        <div class="flex flex-wrap gap-3">
-                            {SKILLS.tools.entorno.map((skill) => (
-                                <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-cyan/5 dark:hover:bg-cyan/10 hover:border-cyan/30 hover:shadow-[0_0_15px_rgba(0,193,253,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-default group shadow-sm dark:shadow-none">
-                                    <div class="w-7 h-7 flex items-center justify-center bg-slate-50 dark:bg-black/20 rounded-full p-1.5 shadow-inner border border-slate-100 dark:border-transparent">
-                                        <Picture
-                                        src={skill.icon}
-                                        alt={skill.name}
-                                        width={72}
-                                        height={72}
-                                        widths={[72, 108, 144]}
-                                        sizes="(max-width: 768px) 36px, (max-width: 1024px) 48px, 64px"
-                                        loading="lazy"
-                                        fetchpriority="low"
-                                        decoding="async"
-                                        class={`w-full h-full object-contain transition-all ${skill.whiteLogo ? 'invert dark:invert-0' : 'group-hover:drop-shadow-[0_0_5px_rgba(0,193,253,0.5)]'}`}
-                                        />
-                                    </div>
-                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200 group-hover:text-cyan dark:group-hover:text-white transition-colors">{skill.name}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <!-- Sección de Cloud, Backend as a Service & CMS -->
-                    <div>
-                        <h3 class="text-[10px] font-black text-slate-400 dark:text-white/30 mb-4 uppercase tracking-[0.2em]">Cloud, Backend as a Service & CMS</h3>
-                        <div class="flex flex-wrap gap-3">
-                            {SKILLS.tools.cloud.map((skill) => (
-                                <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-cyan/5 dark:hover:bg-cyan/10 hover:border-cyan/30 hover:shadow-[0_0_15px_rgba(0,193,253,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-default group shadow-sm dark:shadow-none">
-                                    <div class="w-7 h-7 flex items-center justify-center bg-slate-50 dark:bg-black/20 rounded-full p-1.5 shadow-inner border border-slate-100 dark:border-transparent">
-                                        <Picture
-                                        src={skill.icon}
-                                        alt={skill.name}
-                                        width={48}
-                                        height={48}
-                                        widths={[48, 72, 96]}
-                                        sizes="(max-width: 768px) 32px, (max-width: 1024px) 40px, 48px"
-                                        loading="lazy"
-                                        fetchpriority="low"
-                                        decoding="async"
-                                        class={`w-full h-full object-contain transition-all ${skill.whiteLogo ? 'invert dark:invert-0' : 'group-hover:drop-shadow-[0_0_5px_rgba(0,193,253,0.5)]'}`}
-                                        />
-                                    </div>
-                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200 group-hover:text-cyan dark:group-hover:text-white transition-colors">{skill.name}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
+            ))}
         </div>
+
     </div>
 </section>
 
+<style>
+    .accordion-content {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .stack-accordion-item.is-active .accordion-content {
+        grid-template-rows: 1fr;
+    }
+    .stack-accordion-item.is-active .chevron {
+        transform: rotate(180deg);
+        color: var(--color-cyan);
+    }
+</style>
+
 <script>
-    const initTabs = () => {
-        const buttons = document.querySelectorAll('.tab-btn');
-        const contents = document.querySelectorAll('.tab-content');
+    const initAboutAccordion = () => {
+        const items = document.querySelectorAll('.stack-accordion-item');
+        items.forEach(item => {
+            const trigger = item.querySelector('.accordion-trigger');
+            trigger?.addEventListener('click', () => {
+                items.forEach(i => { if(i !== item) i.classList.remove('is-active'); });
+                item.classList.toggle('is-active');
 
-        if (buttons.length === 0 || contents.length === 0) return;
-
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const targetId = btn.getAttribute('data-target');
-
-                buttons.forEach(b => {
-                    b.classList.remove('bg-cyan/10', 'dark:bg-white/10', 'text-cyan', 'shadow-[0_0_15px_rgba(0,193,253,0.15)]');
-                    b.classList.add('text-slate-500', 'dark:text-text-muted', 'hover:text-slate-900', 'dark:hover:text-white', 'hover:bg-slate-200/50', 'dark:hover:bg-white/5');
-                });
-
-                btn.classList.remove('text-slate-500', 'dark:text-text-muted', 'hover:text-slate-900', 'dark:hover:text-white', 'hover:bg-slate-200/50', 'dark:hover:bg-white/5');
-                btn.classList.add('bg-cyan/10', 'dark:bg-white/10', 'text-cyan', 'shadow-[0_0_15px_rgba(0,193,253,0.15)]');
-
-                contents.forEach(content => {
-                    if (content.id === targetId) {
-                        content.classList.remove('opacity-0', 'scale-95', 'absolute', 'pointer-events-none');
-                        content.classList.add('opacity-100', 'scale-100', 'relative', 'z-10');
-                    } else {
-                        content.classList.remove('opacity-100', 'scale-100', 'relative', 'z-10');
-                        content.classList.add('opacity-0', 'scale-95', 'absolute', 'pointer-events-none');
-                    }
-                });
             });
         });
     }
-
-    initTabs();
-    document.addEventListener('astro:page-load', initTabs);
+    initAboutAccordion();
+    document.addEventListener('astro:page-load', initAboutAccordion);
 </script>

@@ -1,8 +1,29 @@
 ---
 import { Picture } from "astro:assets";
 import { Images } from "@assets/images";
+import cv from "@assets/CV_Alfonso.pdf";
 
 const currentYear = new Date().getFullYear();
+
+const buttonData = [
+    {
+        label: "Email",
+        href: "mailto:alfonsoaldev@gmail.com"
+    },
+    {
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/in/alfonso-adiego-luque/"
+    },
+    {
+        label: "GitHub",
+        href: "https://github.com/alfonsoadluq"
+    },
+    {
+        label: "Currículum",
+        href: cv,
+        fileName: "CV_Alfonso.pdf"
+    }
+]
 ---
 
 <footer class="w-full py-12 border-t border-slate-200 dark:border-white/5 transition-colors duration-500">
@@ -11,7 +32,7 @@ const currentYear = new Date().getFullYear();
         
         <!-- IZQUIERDA: Logo + Copyright -->
         <div class="flex items-center gap-6">
-            <a href="#welcome" class="hover:opacity-80 transition-opacity">
+            <a href="#welcome" title={} class="hover:opacity-80 transition-opacity">
                 <Picture
                     src={Images.logos.logoAlfonso}
                     alt="Logo Alfonso Adiego"
