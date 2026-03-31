@@ -126,7 +126,7 @@
         box-shadow: 0 0px 10px var(--color-cyan-glow);
     }
     .btn-cyber:hover {
-        background-position: right center; /* Desplaza el degradado */
+        background-position: right center;
         box-shadow: 0 0 15px var(--color-cyan);
         transform: scale(1.05);
     }
@@ -167,7 +167,6 @@
         overflow: hidden;
     }
 
-    /* MODIFICACIÓN: Añadimos transición y opacidad 0 al brillo */
     .card-border-glow::before {
         content: "";
         position: absolute;
@@ -228,12 +227,9 @@
         margin-left: 4px;
         color: var(--color-cyan);
         font-weight: 900;
-        /* Forzamos renderizado por GPU */
         will-change: opacity, transform;
         transform: translateZ(0);
-        /* Animación ultra-suave */
         animation: blink 0.7s step-end infinite;
-        /* Brillo neón que acompaña al texto */
         text-shadow: 0 0 8px var(--color-cyan);
     }
 
@@ -244,28 +240,24 @@
         left: -50%;
         width: 200%;
         height: 200%;
-        /* Gradiente con tu color Cyan */
         background: linear-gradient(
             0deg, 
             transparent, 
             transparent 40%, 
             rgba(0, 193, 253, 0.3)
         );
-        /* Hacemos que empiece arriba a la izquierda para cruzar toda la imagen */
         transform: rotate(-45deg) translateY(-100%);
         transition: all 0.6s ease-in-out;
         opacity: 0;
         z-index: 10;
-        pointer-events: none; /* IMPORTANTE: Para no bloquear clics */
+        pointer-events: none;
     }
 
-    /* Al hacer hover en el contenedor padre (.group), activamos el holograma */
     .group:hover .holographic-card::after {
         opacity: 1;
         transform: rotate(-45deg) translateY(100%);
     }
 
-    /* Sombra Cyan al hacer hover (reemplaza al scale) */
     .group:hover .holographic-card {
         box-shadow: 0 0 25px rgba(0, 193, 253, 0.4);
     }

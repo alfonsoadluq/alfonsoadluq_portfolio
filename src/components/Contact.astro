@@ -4,20 +4,28 @@ import cv from "@assets/CV_Alfonso.pdf";
 const buttonData = [
     {
         label: "Email",
-        href: "mailto:alfonsoaldev@gmail.com"
+        href: "mailto:alfonsoaldev@gmail.com",
+        title: "Correo electrónico",
+        "ariaLabel": "Correo electrónico"
     },
     {
         label: "LinkedIn",
-        href: "https://www.linkedin.com/in/alfonso-adiego-luque/"
+        href: "https://www.linkedin.com/in/alfonso-adiego-luque/",
+        title: "LinkedIn",
+        "ariaLabel": "LinkedIn de Alfonso Adiego Luque"
     },
     {
         label: "GitHub",
-        href: "https://github.com/alfonsoadluq"
+        href: "https://github.com/alfonsoadluq",
+        title: "GitHub",
+        "ariaLabel": "GitHub de Alfonso Adiego Luque"
     },
     {
         label: "Currículum",
         href: cv,
-        fileName: "CV_Alfonso.pdf"
+        fileName: "CV_Alfonso.pdf",
+        title: "Currículum",
+        "ariaLabel": "Currículum de Alfonso Adiego Luque"
     }
 ]
 ---
@@ -56,7 +64,7 @@ const buttonData = [
         </a>
 
         <!-- LinkedIn -->
-        <a href={buttonData[1].href} target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn de Alfonso Adiego Luque" class="group relative flex items-center justify-start w-12 h-12 btn-cyber text-white rounded-full transition-all duration-500 overflow-hidden hover:w-35 p-3 active:scale-95 shadow-lg">
+        <a href={buttonData[1].href} target="_blank" rel="noopener noreferrer" title={buttonData[1].title} aria-label={buttonData[1].ariaLabel} class="group relative flex items-center justify-start w-12 h-12 btn-cyber text-white rounded-full transition-all duration-500 overflow-hidden hover:w-35 p-3 active:scale-95 shadow-lg">
             <div class="flex items-center justify-center min-w-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -70,7 +78,7 @@ const buttonData = [
         </a>
 
         <!-- GitHub -->
-        <a href={buttonData[2].href} target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub de Alfonso Adiego Luque" class="group relative flex items-center justify-start w-12 h-12 btn-cyber text-white rounded-full transition-all duration-500 overflow-hidden hover:w-31 p-3 active:scale-95 shadow-lg">
+        <a href={buttonData[2].href} target="_blank" rel="noopener noreferrer" title={buttonData[2].title} aria-label={buttonData[2].ariaLabel} class="group relative flex items-center justify-start w-12 h-12 btn-cyber text-white rounded-full transition-all duration-500 overflow-hidden hover:w-31 p-3 active:scale-95 shadow-lg">
             <div class="flex items-center justify-center min-w-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -83,7 +91,7 @@ const buttonData = [
         </a>
 
         <!-- Currículum -->
-        <a href={buttonData[3].href} download={buttonData[3].fileName} rel="noopener noreferrer" target="_blank" title="Currículum" aria-label="Currículum de Alfonso Adiego Luque" class="group relative flex items-center justify-start w-12 h-12 btn-cyber text-white rounded-full transition-all duration-500 overflow-hidden hover:w-38 p-3 active:scale-95 shadow-lg">
+        <a href={buttonData[3].href} download={buttonData[3].fileName} rel="noopener noreferrer" target="_blank" title={buttonData[3].title} aria-label={buttonData[3].ariaLabel} class="group relative flex items-center justify-start w-12 h-12 btn-cyber text-white rounded-full transition-all duration-500 overflow-hidden hover:w-38 p-3 active:scale-95 shadow-lg">
             <div class="flex items-center justify-center min-w-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
