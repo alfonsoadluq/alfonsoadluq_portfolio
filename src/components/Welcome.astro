@@ -1,6 +1,9 @@
 ---
+import { Picture } from "astro:assets";
+import { Images } from "@assets/images";
+
 const welcomeData = {
-    description: "Desarrollador FullStack Junior, con 1 año de experiencia en el desarrollo de aplicaciones web. Apasionado por la tecnología, la optimización y el desarrollo de software de alta calidad.",
+    description: "Soy un desarrollador full stack junior, con 1 año de experiencia en el desarrollo de aplicaciones web. Apasionado por la tecnología, la optimización y el desarrollo de software de alta calidad.",
 }
 
 const typeWritingData = {
@@ -12,10 +15,11 @@ const typeWritingData = {
 }
 ---
 
-<section id={`${Astro.props.id}`} class="max-w-6xl mx-auto px-6 md:px-5 pt-[120px] md:pt-[180px] pb-20">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        <div class="flex flex-col items-start">   
-            <!-- Badge personalizado -->
+<section id={`${Astro.props.id}`} class="max-w-6xl mx-auto px-6 md:px-5 pt-30 md:pt-45 pb-20 overflow-visible">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+        
+        <!-- Columna izquierda -->
+        <div class="flex flex-col items-start lg:col-span-4 order-2 lg:order-1">
             <h2 class="text-cyan inline-block font-bold tracking-[0.2rem] md:tracking-[0.25rem] mb-6 border border-cyan/20 bg-cyan/5 px-4 py-2 rounded-full shadow-[0_0_15px_rgba(0,193,253,0.1)] whitespace-nowrap text-[10px] md:text-[1.5rem] lg:text-[10px] md:text-xs uppercase">
                 &lt; 
                 <span id="typewriter" data-words={JSON.stringify(Object.values(typeWritingData))}></span>
@@ -25,47 +29,54 @@ const typeWritingData = {
 
             <p class="text-text-muted font-medium mb-2 md:text-[1.5rem] lg:text-base">Bienvenido, soy</p>
             
-            <!-- Nombre -->
-            <h1 class="animate-gradient-text mb-6 text-4xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tighter">
+            <h1 class="animate-gradient-text mb-6 text-4xl md:text-6xl lg:text-8xl font-black leading-[1.1] tracking-tighter">
                 Alfonso Adiego Luque
             </h1>
 
-            <!-- Descripción -->
-            <p class="text-text-muted tracking-[0.05rem] md:tracking-[0.1rem] md:text-[1.5rem] lg:text-base md:max-w-5xl lg:max-w-2xl leading-relaxed">
+            <p class="text-text-muted tracking-[0.05rem] md:tracking-[0.1rem] md:text-[1.5rem] lg:text-lg md:max-w-full lg:max-w-3xl leading-relaxed">
                 {welcomeData.description}
             </p>
 
-            <!-- Botones Sociales -->
             <div class="flex flex-wrap gap-4 pt-8">
                 <a href="mailto:alfonsoaldev@gmail.com" class="group relative flex items-center justify-start w-12 h-12 btn-cyber text-white rounded-full transition-all duration-500 ease-in-out overflow-hidden hover:w-40 active:scale-95 p-3">
-                    <div class="flex items-center justify-center min-w-[24px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-mail">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M22 7.535v9.465a3 3 0 0 1 -2.824 2.995l-.176 .005h-14a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-9.465l9.445 6.297l.116 .066a1 1 0 0 0 .878 0l.116 -.066l9.445 -6.297z" />
-                            <path d="M19 4c1.08 0 2.027 .57 2.555 1.427l-9.555 6.37l-9.555 -6.37a2.999 2.999 0 0 1 2.354 -1.42l.201 -.007h14z" />
-                        </svg>
+                    <div class="flex items-center justify-center min-w-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 7.535v9.465a3 3 0 0 1 -2.824 2.995l-.176 .005h-14a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-9.465l9.445 6.297l.116 .066a1 1 0 0 0 .878 0l.116 -.066l9.445 -6.297z" /><path d="M19 4c1.08 0 2.027 .57 2.555 1.427l-9.555 6.37l-9.555 -6.37a2.999 2.999 0 0 1 2.354 -1.42l.201 -.007h14z" /></svg>
                     </div>
-                    <span class="ml-4 font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        Contáctame
-                    </span>
+                    <span class="ml-4 font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Contáctame</span>
                 </a>
 
                 <a href="https://www.linkedin.com/in/alfonso-adiego-luque/" class="group relative flex items-center justify-start w-12 h-12 btn-cyber text-white rounded-full transition-all duration-500 ease-in-out overflow-hidden hover:w-35 active:scale-95 p-3">
-                    <div class="flex items-center justify-center min-w-[24px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-brand-linkedin">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M17 2a5 5 0 0 1 5 5v10a5 5 0 0 1 -5 5h-10a5 5 0 0 1 -5 -5v-10a5 5 0 0 1 5 -5zm-9 8a1 1 0 0 0 -1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0 -1 -1m6 0a3 3 0 0 0 -1.168 .236l-.125 .057a1 1 0 0 0 -1.707 .707v5a1 1 0 0 0 2 0v-3a1 1 0 0 1 2 0v3a1 1 0 0 0 2 0v-3a3 3 0 0 0 -3 -3m-6 -3a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1" />
-                        </svg>
+                    <div class="flex items-center justify-center min-w-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17 2a5 5 0 0 1 5 5v10a5 5 0 0 1 -5 5h-10a5 5 0 0 1 -5 -5v-10a5 5 0 0 1 5 -5zm-9 8a1 1 0 0 0 -1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0 -1 -1m6 0a3 3 0 0 0 -1.168 .236l-.125 .057a1 1 0 0 0 -1.707 .707v5a1 1 0 0 0 2 0v-3a1 1 0 0 1 2 0v3a1 1 0 0 0 2 0v-3a3 3 0 0 0 -3 -3m-6 -3a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1" /></svg>
                     </div>
-                    <span class="ml-4 font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        LinkedIn
-                    </span>
+                    <span class="ml-4 font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">LinkedIn</span>
                 </a>
             </div>
         </div>
         
-        <!-- Espacio para imagen o contenido derecho en desktop -->
-        <div class="hidden md:block"></div>
+        <!-- Columna derecha (Para fotos o logo) -->
+        <div class="lg:col-span-1 flex justify-center items-center order-1 lg:order-2 perspective-container">
+            <div id="logo-3d" class="relative transition-transform duration-200 ease-out floating-logo">
+                <div class="absolute inset-0 bg-cyan/20 blur-[60px] rounded-full scale-110 opacity-50"></div>
+                
+                <!-- 
+                <Picture
+                src={Images.logos.logoAlfonso}
+                alt="Logo 3D"
+                width={400}
+                height={400}
+                widths={[200, 300, 400, 600]}
+                sizes="(max-width: 768px) 128px, (max-width: 1024px) 192px, 100%"
+                formats={["avif", "webp"]}
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                class="relative z-10 w-32 md:w-48 lg:w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
+                />
+                -->
+                
+            </div>
+        </div>
     </div>
 </section>
 
@@ -73,70 +84,41 @@ const typeWritingData = {
     function initTypewriter() {
         const target = document.getElementById('typewriter');
         if (!target) return;
-
         const words = JSON.parse(target.getAttribute('data-words') || '[]');
-        let wordIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        
-        // Tiempos optimizados
-        const typeSpeed = 60;    
-        const deleteSpeed = 30;  
-        const pauseTime = 2500;  
-        const startPause = 500;  
-
-        let lastTime = 0;
-        let accumulatedTime = 0;
+        let wordIndex = 0, charIndex = 0, isDeleting = false, lastTime = 0, accumulatedTime = 0;
+        const typeSpeed = 60, deleteSpeed = 30, pauseTime = 2500, startPause = 500;
 
         function animate(currentTime) {
             if (!lastTime) lastTime = currentTime;
             const deltaTime = currentTime - lastTime;
             lastTime = currentTime;
             accumulatedTime += deltaTime;
-
             const currentWord = words[wordIndex];
             let currentInterval = isDeleting ? deleteSpeed : typeSpeed;
-
-            if (!isDeleting && charIndex === currentWord.length) {
-                currentInterval = pauseTime;
-            }
-            if (isDeleting && charIndex === 0) {
-                currentInterval = startPause;
-            }
+            if (!isDeleting && charIndex === currentWord.length) currentInterval = pauseTime;
+            if (isDeleting && charIndex === 0) currentInterval = startPause;
 
             if (accumulatedTime >= currentInterval) {
                 accumulatedTime = 0;
-
-                if (!isDeleting && charIndex === currentWord.length) {
-                    isDeleting = true;
-                } 
-                else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    wordIndex = (wordIndex + 1) % words.length;
-                }
-
-                if (isDeleting) {
-                    if (charIndex > 0) charIndex--;
-                } else {
-                    if (charIndex < currentWord.length) charIndex++;
-                }
-
+                if (!isDeleting && charIndex === currentWord.length) isDeleting = true;
+                else if (isDeleting && charIndex === 0) { isDeleting = false; wordIndex = (wordIndex + 1) % words.length; }
+                isDeleting ? charIndex-- : charIndex++;
                 target.textContent = currentWord.substring(0, charIndex);
             }
-
             requestAnimationFrame(animate);
         }
-
         requestAnimationFrame(animate);
     }
 
-    // Inicialización para Astro (con soporte para View Transitions)
     initTypewriter();
-    document.addEventListener('astro:page-load', initTypewriter);
+    document.addEventListener('astro:page-load', () => { initTypewriter(); });
 </script>
 
 <style>
-    /* El cursor parpadeante estilo terminal */
+    .perspective-container {
+        perspective: 1000px;
+    }
+
     .typewriter-cursor {
         color: var(--color-cyan);
         animation: blink 0.8s step-end infinite;
