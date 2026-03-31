@@ -64,6 +64,19 @@
         transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s ease;
     }
 
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-family: 'Inter Variable', sans-serif;
+    }
+
+    p,
+    a,
+    li {
+        font-family: 'Poppins', sans-serif;
+    }
+
     h1{
         font-size: 5rem;
         font-weight: 900;

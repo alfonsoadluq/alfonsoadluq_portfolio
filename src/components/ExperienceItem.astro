@@ -2,62 +2,70 @@
 interface Props {
   title: string;
   company: string;
-  description: string;
-  link?: string;
+  location: string;
   date: string;
+  details: string[];
+  skills: string[];
 }
 
-const { title, company, description, link, date } = Astro.props;
+const { title, company, location, date, details, skills } = Astro.props;
 ---
 
-<div class="relative mx-12 pb-12 grid before:absolute before:-left-8.75 before:block before:h-full before:border-l-2 before:border-white/10 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4 group">
-  
-  <!-- Línea y nodo guía -->
-  <div class="relative pb-12 md:col-span-2">
-    <div class="sticky top-28">
-      
-      <!-- Nodo -->
-      <span class="absolute -left-10.25 top-1 w-3 h-3 rounded-full bg-cyan shadow-[0_0_15px_rgba(0,193,253,0.8)] border border-white/50 group-hover:scale-150 group-hover:shadow-[0_0_25px_rgba(0,193,253,1)] transition-all duration-500"></span>
-
-      <h3 class="text-xl font-bold text-cyan drop-shadow-[0_0_8px_rgba(0,193,253,0.4)]">{title}</h3>
-      <h4 class="font-semibold text-xl text-white/90">{company}</h4>
-      <time class="text-sm font-mono text-purple/80 uppercase tracking-widest">{date}</time>
+<div class="relative pl-12 md:pl-20 group/item">
+  <!-- Línea y Nodos -->
+  <div class="absolute -left-2.75 top-10 z-20">
+    <div class="relative flex items-center justify-center">
+      <div class="absolute w-8 h-8 bg-cyan/20 rounded-full blur-md group-hover/item:bg-cyan/40 transition-colors"></div>
+      <div class="relative w-5 h-5 rounded-full bg-slate-200 dark:bg-[#050b18] border-2 border-cyan shadow-[0_0_10px_rgba(0,193,253,0.3)]">
+        <div class="absolute inset-1 rounded-full bg-cyan shadow-[0_0_8px_#00C1FD]"></div>
+      </div>
     </div>
   </div>
 
-  <!-- Información de la experiencia -->
-  <div class="relative flex flex-col gap-4 pb-4 text-text-muted md:col-span-3">
-    <p class="text-base leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity duration-500">
-      {description}
-    </p>
+  <!-- Tarjetas -->
+  <article class="card-border-glow transition-all duration-500 hover:-translate-y-1">
+    <div class="card-content p-6 md:p-10 bg-white! dark:bg-[#050b18]! backdrop-blur-xl rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors duration-500">
+      
+      <div class="flex flex-col md:flex-row justify-between items-start gap-4 mb-8">
+        <div>
+          <h3 class="text-xl md:text-3xl font-bold text-slate-900 dark:text-white group-hover/item:text-cyan transition-colors duration-500 tracking-tighter">
+            {title}
+          </h3>
+          <p class="text-slate-500 dark:text-slate-400 font-bold text-sm md:text-base mt-1 italic transition-colors">
+            {company} <span class="mx-2 text-cyan/50">|</span> {location}
+          </p>
+        </div>
+        <span class="px-5 py-1.5 rounded-full bg-cyan/10 dark:bg-cyan/5 border border-cyan/30 dark:border-cyan/20 text-cyan text-[10px] md:text-xs font-black uppercase tracking-widest shadow-sm">
+          {date}
+        </span>
+      </div>
 
-    {link && (
-      <a 
-        href={link} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="btn-glass-neon w-fit px-5 py-2 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] flex items-center gap-2 group/link active:scale-90"
-      >
-        Saber más
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover/link:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 6l6 6l-6 6" />
-        </svg>
-      </a>
-    )}
-  </div>
+      <ul class="space-y-4 mb-10">
+        {details.map((detail) => (
+          <li class="flex items-start gap-4 text-slate-700 dark:text-slate-300 text-sm md:text-base leading-relaxed transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"></path>
+            </svg>
+            <span>{detail}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="flex flex-wrap gap-2">
+        {skills.map((skill) => (
+          <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-bold text-slate-600 dark:text-cyan/80 uppercase tracking-widest group-hover/item:border-cyan/40 transition-all shadow-sm dark:shadow-none">
+            {skill}
+          </span>
+        ))}
+      </div>
+    </div>
+  </article>
 </div>
 
 <style>
-  div::before {
-    transition: all 0.5s ease;
-    background: linear-gradient(to bottom, var(--color-cyan) 0%, var(--color-purple) 100%);
-    opacity: 0.1;
-    width: 2px;
-    border-left: none;
-  }
-
-  div:hover::before {
-    opacity: 0.6;
-    box-shadow: 0 0 15px var(--color-cyan-glow);
-  }
+    .card-content {
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+    }
 </style>

@@ -1,37 +1,68 @@
 ---
-import ExperienceItem from "./ExperienceItem.astro"
+import ExperienceItem from "./ExperienceItem.astro";
 
-const EXPERIENCE = [
+// Cuando haya más de 2 experiencias, se mostrará un botón para ver toda la experiencia. En la página principal se mostrarán solo las 2 primeras experiencias.
+export const EXPERIENCE = [
   {
     date: "Enero 2026 - Actualmente",
     title: "FullStack Developer (Prácticas)",
     company: "Taller Empresarial 2.0",
-    description: "Realice la optimización de una base de datos PostgreSQL, utilizando técnicas como Heap-Only Tuples, vistas materializadas o caching, como resultado los datos leidos por llamada aumentaron entre un 40% a 60% además de reducir la latencia de 50ms a 16ms.",
-    link: "",
+    location: "Córdoba",
+    details: [
+      "Desarrollo de Aplicaciones Web usando Laravel, PHP.",
+      "Optimización de bases de datos usando técnicas como Heap-Only Tuples o Index-Only Tuples.",
+    ],
+    skills: ["Astro", "Laravel", "PHP", "PostgreSQL"],
   },
   {
     date: "Enero 2025 - Marzo 2025",
     title: "BackEnd Developer (Prácticas)",
     company: "Taller Empresarial 2.0",
-    description: "Desarrollé de 2 proyectos internos, utilizando tecnologías como Laravel, Tailwind o AlpineJs. Además de ayudar en la creación de una aplicación web sobre control de tarifas hosting, implemetando funcionalidades utilizando Django.",
-    link: "",
+    location: "Córdoba",
+    details: [
+      "Desarrollo de una plataforma web con Laravel para la gestión y facturación de servicios de hosting.",
+      "Participación en la creación de la interfaz del sistema mediante Django, realizando pruebas de endpoints con Postman.",
+    ],
+    skills: ["Laravel", "Python", "Django", "Postman", "API REST"],
   },
-]
+];
+
+const isHomePage = !Astro.url.pathname.includes('all-experience');
+const displayExperience = isHomePage ? EXPERIENCE.slice(0, 2) : EXPERIENCE;
+const showViewMore = isHomePage && EXPERIENCE.length > 2;
 ---
 
-<section id={`${Astro.props.id}`} class="max-w-6xl mx-auto px-4 py-38 md:py-80 lg:py-20 -scroll-mt-12.5 lg:scroll-mt-18">
-  <h2 class="text-3xl font-black mb-12 flex items-center gap-4 text-white">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-cyan icon icon-tabler icons-tabler-filled icon-tabler-clock"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-5 2.66a1 1 0 0 0 -.993 .883l-.007 .117v5l.009 .131a1 1 0 0 0 .197 .477l.087 .1l3 3l.094 .082a1 1 0 0 0 1.226 0l.094 -.083l.083 -.094a1 1 0 0 0 0 -1.226l-.083 -.094l-2.707 -2.708v-4.585l-.007 -.117a1 1 0 0 0 -.993 -.883z" /></svg>
-    Experiencia
+<section id={Astro.props.id} class="py-24 max-w-6xl mx-auto px-6 overflow-visible">
+  <h2 class="text-4xl font-black mb-24 flex items-center gap-4 text-slate-900 dark:text-white tracking-tighter transition-colors duration-500">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-cyan">
+      <path d="M12 2a10 10 0 1 1 -10 10a10 10 0 0 1 10 -10zm-1 5v5l3 3l1 -1l-3 -3v-4h-1z"></path>
+    </svg>
+    Experiencia Profesional
   </h2>
 
-  <ol class="relative">
-    {
-      EXPERIENCE.map((item) => (
-        <li>
+  <div class="relative ml-4 md:ml-12">
+    <div class="absolute -left-px top-0 w-0.5 h-full bg-slate-200 dark:bg-white/10 transition-colors duration-500"></div>
+    
+    <div 
+      id="timeline-beam" 
+      class="absolute -left-px top-0 w-0.5 h-40 bg-linear-to-b from-transparent via-cyan to-transparent shadow-[0_0_20px_#00C1FD] z-10 transition-transform duration-500 ease-out opacity-0 will-change-transform"
+    ></div>
+
+    <div class="flex flex-col gap-20">
+      {displayExperience.map((item) => (
+        <div class="experience-node">
           <ExperienceItem {...item} />
-        </li>
-      ))
-    }
-  </ol>
+        </div>
+      ))}
+    </div>
+
+    {showViewMore && (
+      <div class="mt-20 flex justify-center md:justify-start md:ml-20">
+          <a href="/AllExperience" class="group btn-cyber flex items-center gap-3 px-8 py-4 rounded-2xl font-black uppercase text-sm tracking-widest text-white shadow-lg active:scale-95 transition-all">
+              Ver toda la experiencia
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+          </a>
+      </div>
+    )}
+  </div>
 </section>
