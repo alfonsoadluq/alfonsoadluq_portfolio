@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "alfonsoadluq-portfolio",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -18,5 +18,11 @@
     "astro": "^6.1.2",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.2.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }
