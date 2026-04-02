@@ -6,6 +6,7 @@ import { initExperienceMobile } from "./experience.ts";
 import { initProjects } from "./projects.ts";
 import { initAbout } from "./about.ts";
 import { initTheme } from "./theme.ts";
+import { initContact } from "./contact.ts";
 
 let isInitialized = false;
 
@@ -21,6 +22,7 @@ const initAll = () => {
   initProjects();
   initAbout();
   initTheme();
+  initContact();
 
   isInitialized = true;
 };
