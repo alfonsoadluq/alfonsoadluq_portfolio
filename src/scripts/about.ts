@@ -1,25 +1,25 @@
+// src/scripts/about.ts
+
 export const initAbout = () => {
-  const accordionItems = document.querySelectorAll(".stack-accordion-item");
+  const items = document.querySelectorAll(".stack-accordion-item");
+  if (items.length === 0) return;
 
-  if (accordionItems.length === 0) return;
+  // UX SENIOR: Abrir el primer elemento por defecto para invitar a la interacción
+  items[0].classList.add("is-active");
 
-  accordionItems.forEach((item) => {
+  items.forEach((item) => {
     const trigger = item.querySelector(".accordion-trigger");
 
-    if (trigger) {
-      // Limpiamos eventos anteriores por si acaso
-      const newTrigger = trigger.cloneNode(true);
-      trigger.parentNode?.replaceChild(newTrigger, trigger);
-
-      newTrigger.addEventListener("click", (e) => {
-        e.preventDefault();
-        // Cerrar otros
-        accordionItems.forEach((otherItem) => {
-          if (otherItem !== item) otherItem.classList.remove("is-active");
-        });
-        // Toggle actual
-        item.classList.toggle("is-active");
+    trigger?.addEventListener("click", () => {
+      // Lógica Exclusiva: Cerramos todos menos el clickeado
+      items.forEach((i) => {
+        if (i !== item) {
+          i.classList.remove("is-active");
+        }
       });
-    }
+
+      // Alternamos el estado del actual
+      item.classList.toggle("is-active");
+    });
   });
 };

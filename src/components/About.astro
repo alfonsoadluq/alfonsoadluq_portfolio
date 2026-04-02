@@ -2,12 +2,16 @@
 import { Picture } from "astro:assets";
 import { Images } from "@assets/images";
 
-const STACK_CATEGORIES = [
+let aboutData = {
+    description: "Soy un desarrollador junior en constante formación, con mentalidad de Ingeniero de Software y con el objetivo claro de consolidarme en el sector a través del estudio de la arquitectura de software, la calidad de código y la experiencia técnica.\n\nApasionado en la creación de proyectos creativos e innovadores, y me esfuerzo por aplicar todos mis conocimientos en su creación, además de siempre estar dispuesto a colaborar con otros para aprender y crecer juntos.",
+}
+
+const STACK_CATEGORIES =[
   {
     id: "lenguajes",
     label: "Lenguajes",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>`,
-    skills: [
+    skills:[
         { name: "JavaScript", icon: Images.icons.JsIcon }, 
         { name: "TypeScript", icon: Images.icons.TypescriptIcon },
         { name: "PHP", icon: Images.icons.PhpIcon },
@@ -20,7 +24,7 @@ const STACK_CATEGORIES = [
     id: "frameworks",
     label: "Frameworks & Librerías",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-terminal"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 7l5 5l-5 5" /><path d="M12 19l7 0" /></svg>`,
-    skills: [
+    skills:[
         { name: "React", icon: Images.icons.ReactIcon, whiteLogo: true },
         { name: "Astro", icon: Images.icons.AstroIcon, whiteLogo: true },
         { name: "Tailwind CSS", icon: Images.icons.TailWindIcon },
@@ -33,7 +37,7 @@ const STACK_CATEGORIES = [
     label: "Bases de Datos",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-database"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 15.731c1.968 1.507 5.234 2.269 9 2.269c3.76 0 7.025 -.76 9 -2.252v2.252c0 2.425 -3.895 3.936 -8.693 3.998l-.307 .002c-4.938 0 -9 -1.523 -9 -4z" /><path d="M3 9.731c1.968 1.507 5.234 2.269 9 2.269c3.76 0 7.025 -.76 9 -2.252v2.252c0 2.477 -4.062 4 -9 4c-4.798 0 -8.77 -1.438 -8.979 -3.795l-.016 -.101l-.005 -.104z" /><path d="M12 2c1.041 0 2.044 .068 2.977 .198l.469 .071q .84 .14 1.586 .348l.44 .131l.075 .024a11 11 0 0 1 .805 .3l.199 .086q .535 .242 .967 .53q .165 .11 .313 .225a3.8 3.8 0 0 1 .669 .668l.091 .128q .07 .105 .129 .211l.07 .139q .163 .35 .2 .73l.01 .211c0 2.477 -4.062 4 -9 4c-4.798 0 -8.77 -1.438 -8.979 -3.795a1 1 0 0 1 -.021 -.205l.005 -.104l.016 -.1c.205 -2.306 4.01 -3.733 8.667 -3.794z" /></svg>`,
     
-    skills: [
+    skills:[
         { name: "MySQL", icon: Images.icons.MySQLIcon, whiteLogo: true },
         { name: "PostgreSQL", icon: Images.icons.PostgreSQLIcon },
         { name: "MariaDB", icon: Images.icons.MariaDBIcon },
@@ -44,7 +48,7 @@ const STACK_CATEGORIES = [
     id: "tools",
     label: "Herramientas & Cloud",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-cloud"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10.04 4.305c2.195 -.667 4.615 -.224 6.36 1.176c1.386 1.108 2.188 2.686 2.252 4.34l.003 .212l.091 .003c2.3 .107 4.143 1.961 4.25 4.27l.004 .211c0 2.407 -1.885 4.372 -4.255 4.482l-.21 .005h-11.878l-.222 -.008c-2.94 -.11 -5.317 -2.399 -5.43 -5.263l-.005 -.216c0 -2.747 2.08 -5.01 4.784 -5.417l.114 -.016l.07 -.181c.663 -1.62 2.056 -2.906 3.829 -3.518l.244 -.08z" /></svg>`,
-    skills: [
+    skills:[
         { name: "VS Code", icon: Images.icons.VSCodeIcon },
         { name: "Git", icon: Images.icons.GitIcon },
         { name: "GitHub", icon: Images.icons.GitHubIcon, whiteLogo: true },
@@ -57,61 +61,49 @@ const STACK_CATEGORIES = [
 ---
 
 <section id="about" class="py-24 max-w-6xl mx-auto px-6 overflow-hidden lg:scroll-mt-18">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center justify-center mb-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-start justify-center mb-24">
         
-        <!-- Columna izquierda de información -->
         <div class="w-full md:sticky md:top-32">
-            <h2 class="text-4xl font-black mb-8 flex items-center gap-4 text-slate-900 dark:text-white tracking-tighter transition-colors duration-500">
+            <h2 class="text-4xl font-black mb-8 flex items-center gap-4 text-slate-900 dark:text-white tracking-tighter transition-colors duration-500 uppercase">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-cyan icon icon-tabler icons-tabler-filled icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" /><path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" /></svg>
                 Sobre mí
             </h2>
             <div class="text-text-muted leading-relaxed space-y-6 text-sm md:text-base transition-colors duration-500">
-                <p>
-                    Soy un desarrollador junior en constante formación, con mentalidad de Ingeniero de Software y con el objetivo claro de consolidarme en el sector a través del estudio de la arquitectura de software, la calidad de código y la experiencia técnica.
-                </p>
-                <p>
-                    apasionado en la creación de proyectos creativos e innovadores, y me esfuerzo por aplicar todos mis conocimientos en su creación, además de siempre estar dispuesto a colaborar con otros para aprender y crecer juntos.
-                </p>
+                <p class="whitespace-pre-line">{aboutData.description}</p>
             </div>
         </div>
 
-        <!-- Columna derecha de stack tecnológico -->
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col items-center justify-center gap-4 w-full">
             {STACK_CATEGORIES.map((cat) => (
-                <div class="stack-accordion-item group/item bg-slate-50/50 dark:bg-[#050b18]/40 border border-slate-200 dark:border-white/5 rounded-[0.8rem] overflow-hidden transition-all duration-500 hover:border-cyan/30 shadow-sm dark:shadow-2xl">
+                <div class="stack-accordion-item w-full group/item bg-slate-50/50 dark:bg-[#050b18]/40 border border-slate-200 dark:border-white/5 rounded-3xl overflow-hidden transition-all duration-500 hover:border-cyan/30 shadow-sm dark:shadow-2xl">
                     
                     <button class="accordion-trigger w-full flex items-center justify-between p-6 cursor-pointer outline-none">
                         <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full bg-cyan/10 flex items-center justify-center text-cyan group-hover/item:scale-110 transition-transform duration-500">
+                            <div class="w-10 h-10 rounded-full bg-cyan/10 flex items-center justify-center text-cyan group-hover/item:scale-110 transition-transform duration-500 shrink-0">
                                 <Fragment set:html={cat.icon} />
                             </div>
-                            <span class="text-lg font-black text-slate-800 dark:text-white tracking-tight uppercase">{cat.label}</span>
+                            <span class="text-lg font-black text-slate-800 dark:text-white tracking-tight uppercase text-left">{cat.label}</span>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="chevron transition-transform duration-500 text-slate-400 dark:text-white/20" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="chevron shrink-0 transition-transform duration-500 text-slate-400 dark:text-white/20" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
 
-                    <!-- Badges con habilidades -->
                     <div class="accordion-content">
+                        <!-- EL FIX ESTÁ AQUÍ: Añadimos pt-4 (padding-top) para que la sombra y el salto (-translate-y) no choquen con el overflow-hidden -->
                         <div class="overflow-hidden">
-                            <div class="px-6 pb-8 flex flex-wrap gap-3">
+                            <div class="px-6 pb-8 pt-4 flex flex-wrap gap-3">
                                 {cat.skills.map((skill) => (
-                                    <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-cyan/5 dark:hover:bg-cyan/10 hover:border-cyan/30 hover:shadow-[0_0_15px_rgba(0,193,253,0.15)] hover:-translate-y-0.5 transition-all duration-300 cursor-default group shadow-sm dark:shadow-none whitespace-nowrap">
+                                    <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-cyan/5 dark:hover:bg-cyan/10 hover:border-cyan/30 hover:shadow-[0_0_15px_rgba(0,193,253,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-default group shadow-sm dark:shadow-none whitespace-nowrap">
                                         
-                                        <div class="w-8 h-8 shrink-0 flex items-center justify-center bg-slate-50 dark:bg-black/20 rounded-full shadow-inner border border-slate-100 dark:border-transparent overflow-hidden">
-                                            <Picture
-                                            src={skill.icon}
-                                            alt={skill.name}
-                                            formats={['avif', 'webp']}
-                                            width={64}
-                                            height={64}
-                                            widths={[32, 48, 64, 80]}
-                                            sizes="(max-width: 768px) 20px, (max-width: 1024px) 32px, 64px"
-                                            loading="lazy"
-                                            fetchpriority="low"
-                                            decoding="async"
-                                            class={`max-w-5 max-h-auto object-contain transition-all ${skill.whiteLogo ? 'invert dark:invert-0' : 'group-hover:drop-shadow-[0_0_5px_rgba(0,193,253,0.5)]'}`}
+                                        <div class="w-8 h-8 shrink-0 flex items-center justify-center bg-slate-50 dark:bg-black/20 rounded-full shadow-inner border border-slate-100 dark:border-transparent">
+                                            <img
+                                                src={skill.icon.src}
+                                                alt={skill.name}
+                                                loading="lazy"
+                                                decoding="async"
+                                                class={`max-w-5 max-h-5 w-auto h-auto object-contain transition-all ${skill.whiteLogo ? 'invert dark:invert-0' : 'group-hover:drop-shadow-[0_0_5px_rgba(0,193,253,0.5)]'}`}
                                             />
                                         </div>
+
                                         <span class="text-sm font-semibold text-slate-700 dark:text-slate-200 group-hover:text-cyan dark:group-hover:text-white transition-colors">{skill.name}</span>
                                     </div>
                                 ))}
@@ -129,7 +121,7 @@ const STACK_CATEGORIES = [
     .accordion-content {
         display: grid;
         grid-template-rows: 0fr;
-        transition: grid-template-rows 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .stack-accordion-item.is-active .accordion-content {
         grid-template-rows: 1fr;
