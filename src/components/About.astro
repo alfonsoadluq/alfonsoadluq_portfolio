@@ -1,5 +1,4 @@
 ---
-import { Picture } from "astro:assets";
 import { Images } from "@assets/images";
 
 let aboutData = {
@@ -88,7 +87,6 @@ const STACK_CATEGORIES =[
                     </button>
 
                     <div class="accordion-content">
-                        <!-- EL FIX ESTÁ AQUÍ: Añadimos pt-4 (padding-top) para que la sombra y el salto (-translate-y) no choquen con el overflow-hidden -->
                         <div class="overflow-hidden">
                             <div class="px-6 pb-8 pt-4 flex flex-wrap gap-3">
                                 {cat.skills.map((skill) => (
