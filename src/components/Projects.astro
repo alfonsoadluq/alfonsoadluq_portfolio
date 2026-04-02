@@ -61,10 +61,42 @@ export const PROJECTS: Project[] = [
     demoLink: null,
     actionLinks: []
   },
+    {
+    id: "foody",
+    category: "personal",
+    featured: false, 
+    inDevelopment: true,
+    overline: "MOBILE • APRENDIZAJE",
+    title: "Foody — Recetas",
+    description: "Gestión inteligente de inventario y recetas para el hogar basándose en ingredientes disponibles.",
+    image: null, 
+    accent: "#00C1FD",
+    features:["AUTENTICACIÓN COMPLETA", "CÁLCULO DE CANTIDADES"],
+    skills: ["React Native", "Expo", "Supabase"],
+    githubLink: "https://github.com/alfonsoadluq",
+    demoLink: null,
+    actionLinks: []
+  },
+    {
+    id: "foody",
+    category: "personal",
+    featured: false, 
+    inDevelopment: true,
+    overline: "MOBILE • APRENDIZAJE",
+    title: "Foody — Recetas",
+    description: "Gestión inteligente de inventario y recetas para el hogar basándose en ingredientes disponibles.",
+    image: null, 
+    accent: "#00C1FD",
+    features:["AUTENTICACIÓN COMPLETA", "CÁLCULO DE CANTIDADES"],
+    skills: ["React Native", "Expo", "Supabase"],
+    githubLink: "https://github.com/alfonsoadluq",
+    demoLink: null,
+    actionLinks: []
+  },
 ];
 
-const displayProjects = isFull ? PROJECTS : PROJECTS.slice(0, 3);
-const showViewMore = !isFull && PROJECTS.length > 3;
+const displayProjects = isFull ? PROJECTS : PROJECTS.slice(0, 4); // La cantidad de proyectos a mostrar
+const showViewMore = !isFull && PROJECTS.length > 4; // La cantidad de proyectos a partir de la cual se muestra el botón de "Ver todos los proyectos"
 ---
 
 <section id={Astro.props.id} class:list={["max-w-6xl mx-auto px-6 overflow-visible transition-all", isFull ? "pb-24 pt-0" : "py-24" ]}>
@@ -179,9 +211,9 @@ const showViewMore = !isFull && PROJECTS.length > 3;
     </div>
 
     {showViewMore && (
-        <div class="mt-20 flex justify-center">
-            <a href="/all-projects" class="group btn-cyber flex items-center gap-3 px-8 py-4 rounded-2xl font-black uppercase text-sm tracking-widest text-white shadow-lg active:scale-95 transition-all">
-                Ver toda la trayectoria
+        <div class="mt-20 flex justify-center lg:justify-start">
+            <a href="/AllProjects" class="group btn-cyber flex items-center gap-3 px-8 py-4 rounded-2xl font-black uppercase text-sm tracking-widest text-white shadow-lg active:scale-95 transition-all">
+                Ver todos los proyectos
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
             </a>
         </div>
